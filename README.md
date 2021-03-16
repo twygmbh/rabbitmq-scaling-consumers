@@ -122,3 +122,4 @@ kubectl delete deploy rabbitmq-consumer
 helm delete rabbitmq
 ```
 # rabbitmq-scaling-consumers
+# rabbitmq-scaling-consumers
