@@ -3,7 +3,7 @@ kind: Secret
 metadata:
   name: rabbitmq-consumer-secret
 data:
-  RabbitMqHost: YW1xcDovL3VzZXI6UEFTU1dPUkRAcmFiYml0bXEuZGVmYXVsdC5zdmMuY2x1c3Rlci5sb2NhbDo1Njcy
+  RabbitMqHost: YW1xcDovL3VzZXI6UEFTU1dPUkRAcmFiYml0bXEucmFiYml0LnN2Yy5jbHVzdGVyLmxvY2FsOjU2NzI=
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -23,12 +23,37 @@ spec:
     spec:
       containers:
         - name: rabbitmq-consumer
-          image: jeffhollan/rabbitmq-client:dev
+          image: eu.gcr.io/twy-website-analytics/rabbitmq-consumer:latest
           imagePullPolicy: Always
-          command:
-            - receive
-          args:
-            - "amqp://user:PASSWORD@rabbitmq.default.svc.cluster.local:5672"
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "50m"
+            limits:
+              memory: "128Mi"
+              cpu: "200m"
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rabbitmq-trigger-app
+  namespace: default
+  labels:
+    app: rabbitmq-trigger-app
+spec:
+  selector:
+    matchLabels:
+      app: rabbitmq-trigger-app
+  template:
+    metadata:
+      labels:
+        app: rabbitmq-trigger-app
+    spec:
+      containers:
+        - name: rabbitmq-trigger-app
+          image: eu.gcr.io/twy-website-analytics/rabbitmq-trigger-app:latest
+          imagePullPolicy: Always
 ---
 apiVersion: keda.sh/v1alpha1
 kind: ScaledObject
@@ -40,11 +65,12 @@ spec:
     name: rabbitmq-consumer
   pollingInterval: 5 # Optional. Default: 30 seconds
   cooldownPeriod: 30 # Optional. Default: 300 seconds
-  maxReplicaCount: 30 # Optional. Default: 100
+  minReplicaCount: 1 # Optional. Default: 100
+  maxReplicaCount: 50 # Optional. Default: 100
   triggers:
     - type: rabbitmq
       metadata:
-        queueName: hello
+        queueName: create-erc-725-profile
         queueLength: "5"
       authenticationRef:
         name: rabbitmq-consumer-trigger
@@ -60,3 +86,4 @@ spec:
       name: rabbitmq-consumer-secret
       key: RabbitMqHost
 ---
+
