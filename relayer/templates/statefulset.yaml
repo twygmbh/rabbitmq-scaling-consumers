@@ -41,25 +41,55 @@ spec:
                 fieldRef:
                   fieldPath: metadata.name
             - name: KEY_0
-              value: {{ .Values.KEY_0 }}
+              valueFrom:
+                secretKeyRef:
+                  name: private-keys
+                  key: KEY_0
             - name: KEY_1
-              value: {{ .Values.KEY_1 }}
+              valueFrom:
+                secretKeyRef:
+                  name: private-keys
+                  key: KEY_1
             - name: KEY_2
-              value: {{ .Values.KEY_2 }}
+              valueFrom:
+                secretKeyRef:
+                  name: private-keys
+                  key: KEY_2
             - name: KEY_3
-              value: {{ .Values.KEY_3 }}
+              valueFrom:
+                secretKeyRef:
+                  name: private-keys
+                  key: KEY_3
             - name: KEY_4
-              value: {{ .Values.KEY_4 }}
+              valueFrom:
+                secretKeyRef:
+                  name: private-keys
+                  key: KEY_4
             - name: KEY_5
-              value: {{ .Values.KEY_5 }}
+              valueFrom:
+                secretKeyRef:
+                  name: private-keys
+                  key: KEY_5
             - name: KEY_6
-              value: {{ .Values.KEY_6 }}
+              valueFrom:
+                secretKeyRef:
+                  name: private-keys
+                  key: KEY_6
             - name: KEY_7
-              value: {{ .Values.KEY_7 }}
+              valueFrom:
+                secretKeyRef:
+                  name: private-keys
+                  key: KEY_7
             - name: KEY_8
-              value: {{ .Values.KEY_8 }}
+              valueFrom:
+                secretKeyRef:
+                  name: private-keys
+                  key: KEY_8
             - name: KEY_9
-              value: {{ .Values.KEY_9 }}
+              valueFrom:
+                secretKeyRef:
+                  name: private-keys
+                  key: KEY_9
             # - name: KEY_10
             #   value: {{ .Values.KEY_10 }}
             # - name: KEY_11
