@@ -1,35 +1,21 @@
-var amqp = require("amqplib/callback_api");
+const amqp = require("amqplib");
 
-amqp.connect(
-  "amqp://user:PASSWORD@rabbitmq.rabbit.svc.cluster.local:5672",
-  function (error, connection) {
-    connection.createChannel(function (error, channel) {
-      var queue = "create-erc-725-profile";
+const messageQueueConnectionString = process.env.AMQP_URL;
+const rabbitMqConnection = amqp.connect(messageQueueConnectionString);
+const queue = "create-erc-725-profile";
 
-      channel.assertQueue(queue, {
-        durable: false,
-      });
-      channel.prefetch(1);
-      console.log(
-        " [*] Waiting for messages in %s. To exit press CTRL+C",
-        queue
-      );
-      channel.consume(
-        queue,
-        function (msg) {
-          var secs = msg.content.toString().split(".").length - 1;
-          console.log(secs);
-
-          console.log(" [x] Received %s", msg.content.toString());
-          setTimeout(function () {
-            console.log(" [x] Done");
-            channel.ack(msg);
-          }, 10 * 1000);
-        },
-        {
-          noAck: false,
-        }
-      );
+rabbitMqConnection
+  .then((connection) => connection.createChannel())
+  .then((channel) => channel.assertQueue(queue))
+  .then((ok) => {
+    return channel.consume(queue, (msg) => {
+      if (msg !== null) {
+        console.log(" [x] Received %s", msg.content.toString());
+        setTimeout(function () {
+          console.log(" [x] Done");
+          channel.ack(msg);
+        }, 10 * 1000);
+      }
     });
-  }
-);
+  })
+  .catch(console.warn);
