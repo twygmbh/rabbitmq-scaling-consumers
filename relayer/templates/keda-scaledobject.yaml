@@ -1,0 +1,20 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: {{ include "relayer.fullname" . }}
+  labels:
+    {{- include "relayer.labels" . | nindent 4 }}
+spec:
+  scaleTargetRef:
+    name: {{ include "relayer.fullname" . }}
+  pollingInterval: 5 # Optional. Default: 30 seconds
+  cooldownPeriod: 30 # Optional. Default: 300 seconds
+  minReplicaCount: 1 # Optional. Default: 100
+  maxReplicaCount: 50 # Optional. Default: 100
+  triggers:
+    - type: rabbitmq
+      metadata:
+        queueName: create-erc-725-profile
+        queueLength: "5"
+      authenticationRef:
+        name: {{ include "relayer.fullname" . }}-trigger

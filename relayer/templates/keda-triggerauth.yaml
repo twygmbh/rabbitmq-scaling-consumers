@@ -1,0 +1,11 @@
+apiVersion: keda.sh/v1alpha1
+kind: TriggerAuthentication
+metadata:
+  name: {{ include "relayer.fullname" . }}-trigger
+  labels:
+    {{- include "relayer.labels" . | nindent 4 }}
+spec:
+  secretTargetRef:
+    - parameter: host
+      name: mq-connection-string
+      key: RabbitMqHost
