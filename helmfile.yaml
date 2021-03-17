@@ -1,0 +1,5 @@
+releases:
+  - name: rabbitmq-consumer
+    chart: relayer
+    secrets:
+    - secrets.yaml

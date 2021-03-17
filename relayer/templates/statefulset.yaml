@@ -1,10 +1,11 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: {{ include "relayer.fullname" . }}
   labels:
     {{- include "relayer.labels" . | nindent 4 }}
 spec:
+  serviceName: relayer-rabbitmq-number
   selector:
     matchLabels:
       {{- include "relayer.selectorLabels" . | nindent 6 }}
@@ -32,21 +33,13 @@ spec:
           env:
             - name: AMQP_URL
               valueFrom:
-                configMapKeyRef:
+                secretKeyRef:
                   name: mq-connection-string
                   key: RabbitMqHost
           ports:
             - name: http
               containerPort: 80
               protocol: TCP
-          livenessProbe:
-            httpGet:
-              path: /
-              port: http
-          readinessProbe:
-            httpGet:
-              path: /
-              port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
