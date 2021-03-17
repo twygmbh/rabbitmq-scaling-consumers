@@ -36,6 +36,130 @@ spec:
                 secretKeyRef:
                   name: mq-connection-string
                   key: RabbitMqHost
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: KEY_0
+              value: {{ .Values.KEY_0 }}
+            - name: KEY_1
+              value: {{ .Values.KEY_1 }}
+            - name: KEY_2
+              value: {{ .Values.KEY_2 }}
+            - name: KEY_3
+              value: {{ .Values.KEY_3 }}
+            - name: KEY_4
+              value: {{ .Values.KEY_4 }}
+            - name: KEY_5
+              value: {{ .Values.KEY_5 }}
+            - name: KEY_6
+              value: {{ .Values.KEY_6 }}
+            - name: KEY_7
+              value: {{ .Values.KEY_7 }}
+            - name: KEY_8
+              value: {{ .Values.KEY_8 }}
+            - name: KEY_9
+              value: {{ .Values.KEY_9 }}
+            # - name: KEY_10
+            #   value: {{ .Values.KEY_10 }}
+            # - name: KEY_11
+            #   value: {{ .Values.KEY_11 }}
+            # - name: KEY_12
+            #   value: {{ .Values.KEY_12 }}
+            # - name: KEY_13
+            #   value: {{ .Values.KEY_13 }}
+            # - name: KEY_14
+            #   value: {{ .Values.KEY_14 }}
+            # - name: KEY_15
+            #   value: {{ .Values.KEY_15 }}
+            # - name: KEY_16
+            #   value: {{ .Values.KEY_16 }}
+            # - name: KEY_17
+            #   value: {{ .Values.KEY_17 }}
+            # - name: KEY_18
+            #   value: {{ .Values.KEY_18 }}
+            # - name: KEY_19
+            #   value: {{ .Values.KEY_19 }}
+            # - name: KEY_10
+            #   value: {{ .Values.KEY_10 }}
+            # - name: KEY_11
+            #   value: {{ .Values.KEY_11 }}
+            # - name: KEY_12
+            #   value: {{ .Values.KEY_12 }}
+            # - name: KEY_13
+            #   value: {{ .Values.KEY_13 }}
+            # - name: KEY_14
+            #   value: {{ .Values.KEY_14 }}
+            # - name: KEY_15
+            #   value: {{ .Values.KEY_15 }}
+            # - name: KEY_16
+            #   value: {{ .Values.KEY_16 }}
+            # - name: KEY_17
+            #   value: {{ .Values.KEY_17 }}
+            # - name: KEY_18
+            #   value: {{ .Values.KEY_18 }}
+            # - name: KEY_19
+            #   value: {{ .Values.KEY_19 }}
+            # - name: KEY_20
+            #   value: {{ .Values.KEY_20 }}
+            # - name: KEY_21
+            #   value: {{ .Values.KEY_21 }}
+            # - name: KEY_22
+            #   value: {{ .Values.KEY_22 }}
+            # - name: KEY_23
+            #   value: {{ .Values.KEY_23 }}
+            # - name: KEY_24
+            #   value: {{ .Values.KEY_24 }}
+            # - name: KEY_25
+            #   value: {{ .Values.KEY_25 }}
+            # - name: KEY_26
+            #   value: {{ .Values.KEY_26 }}
+            # - name: KEY_27
+            #   value: {{ .Values.KEY_27 }}
+            # - name: KEY_28
+            #   value: {{ .Values.KEY_28 }}
+            # - name: KEY_29
+            #   value: {{ .Values.KEY_29 }}
+            # - name: KEY_30
+            #   value: {{ .Values.KEY_30 }}
+            # - name: KEY_31
+            #   value: {{ .Values.KEY_31 }}
+            # - name: KEY_32
+            #   value: {{ .Values.KEY_32 }}
+            # - name: KEY_33
+            #   value: {{ .Values.KEY_33 }}
+            # - name: KEY_34
+            #   value: {{ .Values.KEY_34 }}
+            # - name: KEY_35
+            #   value: {{ .Values.KEY_35 }}
+            # - name: KEY_36
+            #   value: {{ .Values.KEY_36 }}
+            # - name: KEY_37
+            #   value: {{ .Values.KEY_37 }}
+            # - name: KEY_38
+            #   value: {{ .Values.KEY_38 }}
+            # - name: KEY_39
+            #   value: {{ .Values.KEY_39 }}
+            # - name: KEY_40
+            #   value: {{ .Values.KEY_40 }}
+            # - name: KEY_41
+            #   value: {{ .Values.KEY_41 }}
+            # - name: KEY_42
+            #   value: {{ .Values.KEY_42 }}
+            # - name: KEY_43
+            #   value: {{ .Values.KEY_43 }}
+            # - name: KEY_44
+            #   value: {{ .Values.KEY_44 }}
+            # - name: KEY_45
+            #   value: {{ .Values.KEY_45 }}
+            # - name: KEY_46
+            #   value: {{ .Values.KEY_46 }}
+            # - name: KEY_47
+            #   value: {{ .Values.KEY_47 }}
+            # - name: KEY_48
+            #   value: {{ .Values.KEY_48 }}
+            # - name: KEY_49
+            #   value: {{ .Values.KEY_49 }}
           ports:
             - name: http
               containerPort: 80
